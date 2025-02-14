@@ -1,20 +1,202 @@
+1️⃣ Fail index.html (Halaman Utama)
+
 <!DOCTYPE html>
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kad Kahwin</title>
+    <title>Walimatulurus Aliah & Imran</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Majlis Perkahwinan</h1>
-        <p>Imran & Pasangan</p>
-        <button onclick="navigate('doa')">Doa</button>
-        <button onclick="navigate('shop')">Shop</button>
-        <button onclick="navigate('ucapan')">Ucapan</button>
+
+    <div class="kad">
+        <h1 class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</h1>
+        <h2>Walimatulurus</h2>
+        <h3>Aliah & Imran</h3>
+        <p>Dengan penuh kesyukuran, kami menjemput tuan/puan/encik/saudara/saudari ke majlis perkahwinan anakanda kami.</p>
+        
+        <h4>💍 Tarikh: Sabtu, 20 Disember 2025</h4>
+        <h4>⏰ Masa: 11:00 AM - 4:00 PM</h4>
+        <h4>📍 Lokasi: <a href="https://maps.app.goo.gl/9W67kcu88cxG5pUGA" target="_blank">Laman Limas Malaysia, Kluang</a></h4>
+
+        <button onclick="location.href='doa.html'">Doa Restu</button>
+        <button onclick="location.href='rsvp.html'">RSVP Kehadiran</button>
     </div>
-    <div class="flowers"></div>
+
 </body>
-</html> 
+</html>
+
+
+---
+
+2️⃣ Fail rsvp.html (Halaman RSVP)
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP Kehadiran</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+
+    <div class="kad">
+        <h2>RSVP Kehadiran</h2>
+        <form id="rsvpForm">
+            <label>Nama:</label>
+            <input type="text" id="nama" required>
+
+            <label>Kehadiran:</label>
+            <input type="radio" name="kehadiran" value="Hadir" required> Hadir
+            <input type="radio" name="kehadiran" value="Tidak Hadir" required> Tidak Hadir
+
+            <label>Bilangan Kehadiran:</label>
+            <input type="number" id="bilangan" required>
+
+            <label>Ucapan:</label>
+            <textarea id="ucapan"></textarea>
+
+            <button type="submit">Hantar</button>
+        </form>
+    </div>
+
+</body>
+</html>
+
+
+---
+
+3️⃣ Fail doa.html (Halaman Doa)
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doa Restu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="kad">
+        <h2>Doa Restu</h2>
+        <p>اللهم بارك لهما وبارك عليهما واجمع بينهما في خير</p>
+        <p>"Ya Allah, berkatilah pasangan ini, rahmatilah mereka, dan satukanlah mereka dalam kebaikan."</p>
+
+        <button onclick="location.href='hadiah.html'">Lihat Senarai Hadiah</button>
+    </div>
+
+</body>
+</html>
+
+
+---
+
+4️⃣ Fail hadiah.html (Halaman Hadiah)
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senarai Hadiah</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="kad">
+        <h2>Senarai Hadiah</h2>
+        <ul>
+            <li><a href="https://my.shp.ee/p5V3MBJ" target="_blank">🎁 Periuk</a></li>
+            <li><a href="https://my.shp.ee/13yGv8K" target="_blank">🎁 Tupperware</a></li>
+            <li><a href="https://my.shp.ee/XhbZT6V" target="_blank">🎁 Air Fryer</a></li>
+        </ul>
+    </div>
+
+</body>
+</html>
+
+
+---
+
+5️⃣ Fail script.js (Kod RSVP ke Google Sheets)
+
+document.getElementById("rsvpForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    
+    let nama = document.getElementById("nama").value;
+    let kehadiran = document.querySelector('input[name="kehadiran"]:checked').value;
+    let bilangan = document.getElementById("bilangan").value;
+    let ucapan = document.getElementById("ucapan").value;
+
+    let data = {
+        nama: nama,
+        kehadiran: kehadiran,
+        bilangan: bilangan,
+        ucapan: ucapan
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbzCfMP8FAyH7JQmbBBhJ77I2iZvEBwVdzKVl5RKK361/dev", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+    })
+    .then(response => response.text())
+    .then(data => alert("RSVP Berjaya Dihantar!"))
+    .catch(error => console.error("Error:", error));
+});
+
+
+---
+
+6️⃣ Fail style.css (Tema & Animasi)
+
+body {
+    font-family: 'Great Vibes', cursive;
+    background: url('https://source.unsplash.com/1600x900/?wedding,flowers') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.kad {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+h1, h2, h3, h4, p {
+    font-family: 'Dancing Script', cursive;
+}
+
+button {
+    background: #b5651d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #8c4313;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+---
